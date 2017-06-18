@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sandbox for management team exploding profiles." />
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>trans - Image Explode test</title>
+
+  <link rel="stylesheet/less" type="text/css" href="../css/management.less" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>
+
+  <!-- Bootstrap Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link href="" type="text/css" rel="stylesheet">
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+  <!-- jQuery (necessary for plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../js/ScrollMagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
+</head>
+
+<body class="css-management">
+
+<header class="row col-sm-12 css-management-msgs invisible">
+  <div class="init-status">
+  </div>
+  <div class="cycle-status"  cycles="0">
+  </div>
+</header>
+
+    <div class="hidden-xs col-sm-2 css-management-profile-column">
+      <div class="profiles-container">
+
+        <div class="profile-container" id="01-gina">
+          <div class="image">
+            <img class="profile-photo" src="../images/gina_5580042-profile.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Gina Mina, PhD</div>
+            <div class="title">Chief Executive Officer</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-stefan">
+          <div class="image">
+            <img class="profile-photo" src="../images/stefan_swanepoel-profile-1024x683.png" />
+          </div>
+          <div class="info">
+            <div class="name">Stefan Swanepoe</div>
+            <div class="title">Chief Scientist</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-ray">
+          <div class="image">
+            <img class="profile-photo" src="../images/ray_novarina-profile-2700.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Ray Novarina</div>
+            <div class="title">Vice President Engineering</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-doug">
+          <div class="image">
+            <img class="profile-photo" src="../images/doug_hozer-profile_img.png" />
+          </div>
+          <div class="info">
+            <div class="name">Doug Hozer</div>
+            <div class="title">Grunt 1</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-jamer">
+          <div class="image">
+            <img class="profile-photo" src="../images/jamer_hunt.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Jamer Hunt</div>
+            <div class="title">Grunt 2</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-james">
+          <div class="image">
+            <img class="profile-photo" src="../images/james_glasnapp_parc-2.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">James Glasnapp</div>
+            <div class="title">Grunt 3</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-leslie">
+          <div class="image">
+            <img class="profile-photo" src="../images/leslie_none-372c965.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Leslie</div>
+            <div class="title">Grunt 4</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-michael">
+          <div class="image">
+            <img class="profile-photo" src="../images/michael-asmar.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Michael Asmar</div>
+            <div class="title">Grunt 5</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-steve">
+          <div class="image">
+            <img class="profile-photo" src="../images/steve_smith-profile-picture.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Steve Smith</div>
+            <div class="title">Grunt 6</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-mock">
+          <div class="image">
+            <img class="profile-photo" src="../images/mock-profile.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Mock</div>
+            <div class="title">Grunt 7</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-reema">
+          <div class="image">
+            <img class="profile-photo" src="../images/reema_arya-profile.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Reema Arya</div>
+            <div class="title">CTO</div>
+          </div>
+        </div>
+
+        <div class="profile-container" id="01-juliana">
+          <div class="image">
+            <img class="profile-photo" src="../images/juliana_bastos-profile_pic.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Juliana Bastos</div>
+            <div class="title">Executive Chef</div>
+          </div>
+        </div>
+
+        <br /><br />
+    </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-10 css-management-bio-column">
+      <div class="bios-container">
+
+        <div class="row bio-container" id="bio-01-gina">
+          <div class="col-sm-5">
+            <div class="info">
+              <div class="name">Gina Mina, PhD</div>
+              <div class="title">Chief Executive Officer</div>
+              <div class="short-bio">
+                Gina leads the commercial implementation of The Climate Corporation's systems and solutions, as well as enhanced global coordination, growth and operational efficiencies across the company.
+                She most recently led Monsanto's Row Crop Business in the Americas and has served in leadership roles for a variety of Monsanto's businesses, including: Vice President, U.S. Row Crops; CEO of Renessen LLC, a biotechnology joint venture with Cargill; and Director of Technology, Agricultural Productivity. Gina has a B.S. degree in Chemistry from Denison University, a M.S. degree in Chemistry from the University of Michigan and a Ph.D. in Chemistry from Princeton University. She is the author and inventor of more than 50 scientific publications and U.S. patents related to agricultural technology.
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="image">
+              <img class="profile-photo" src="../images/gina_5580042-profile-halftone-image-generator.png" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row bio-container" id="bio-01-stefan">
+          <div class="col-sm-5">
+            <div class="info">
+              <div class="name">Stefan Swanepoe</div>
+              <div class="title">Chief Scientist</div>
+              <div class="short-bio">
+                Stefan leads the Science organization at The Climate Corporation, where he drives the company’s research and development efforts in data science, measurement and field research. Sam’s connection to agriculture started young, growing up on a grain and livestock farm in west-central Illinois. He brings more than two decades of experience in plant breeding and global agricultural development – contributing nearly 60 publications and patents relating to advances in agricultural technology. Prior to joining The Climate Corporation, Stefan led Monsanto’s Global Plant Breeding team, overseeing one of the largest, most integrated plant genetics programs in the world. He holds a B.S., M.S. and Ph.D. in genetics and plant breeding from the University of Illinois at Champaign-Urbana.
+              </div>
+            </div>
+          </div>
+            <div class="col-sm-5">
+              <div class="image">
+                <img class="profile-photo" src="../images/stefan_swanepoel-halftone-image-generator.png" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row bio-container" id="bio-01-ray">
+            <div class="col-sm-5">
+              <div class="info">
+                <div class="name">Ray Novarina</div>
+                <div class="title">Vice President Engineering</div>
+                <div class="short-bio">
+                  Ray leads the The Climate Corporation's Engineering team. He has more than 15 years of experience leading the development of large-scale systems in a variety of industries. Prior to The Climate Corporation, Brian worked at Orbitz as a Senior Architect responsible for the development of their distributed service platform and overall architecture. Before Orbitz, Brian worked at the investment bank UBS where he built global interest rate trading systems. He has contributed frequently to the open source community, including having been the lead developer for the Jython project. He holds a B.S. in Finance from the University of Illinois at Champaign.
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="image">
+                <img class="profile-photo" src="../images/ray_novarina-halftone-image-generator.png" />
+              </div>
+            </div>
+        </div>
+
+        <div class="row bio-container" id="bio-01-doug">
+          <div class="col-sm-5">
+            <div class="info">
+              <div class="name">Doug Hozer</div>
+              <div class="title">Grunt 1</div>
+              <div class="short-bio">
+                Doug is a grunt. He also leads the The Climate Corporation's Engineering team. He has more than 15 years of experience leading the development of large-scale systems in a variety of industries. Prior to The Climate Corporation, Brian worked at Orbitz as a Senior Architect responsible for the development of their distributed service platform and overall architecture. Before Orbitz, Brian worked at the investment bank UBS where he built global interest rate trading systems. He has contributed frequently to the open source community, including having been the lead developer for the Jython project. He holds a B.S. in Finance from the University of Illinois at Champaign.
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="image">
+              <img class="profile-photo" src="../images/doug_hozer-halftone-image-generator.png" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row bio-container" id="bio-01-jamar">
+          <div class="col-sm-5">
+            <div class="info">
+              <div class="name">Jamar Hunt</div>
+              <div class="title">Grunt 2</div>
+              <div class="short-bio">
+                Jamar is Grunt 2. He sorta leads the The Climate Corporation's Engineering team. He has more than 15 years of experience leading the development of large-scale systems in a variety of industries. Prior to The Climate Corporation, Brian worked at Orbitz as a Senior Architect responsible for the development of their distributed service platform and overall architecture. Before Orbitz, Brian worked at the investment bank UBS where he built global interest rate trading systems. He has contributed frequently to the open source community, including having been the lead developer for the Jython project. He holds a B.S. in Finance from the University of Illinois at Champaign.
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="image">
+              <img class="profile-photo" src="../images/jamar_hunt-halftone-image-generator.png" />
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+  <script src="../js/management.js"></script>
+  <script src="../js/exploding-lib.js"></script>
+
+</body>
+</html>
