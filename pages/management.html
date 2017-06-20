@@ -33,7 +33,7 @@
 
 <body class="css-management">
 
-<header class="row col-sm-12 css-management-msgs invisible">
+<header class="row col-sm-12 css-management-msgs"  style="font-size: .8em; height: 40px;">
   <div class="init-status">
   </div>
   <div class="cycle-status"  cycles="0">
@@ -43,7 +43,7 @@
     <div class="hidden-xs col-sm-2 css-management-profile-column">
       <div class="profiles-container">
 
-        <div class="profile-container" id="01-gina">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/gina_5580042-profile.jpg" />
           </div>
@@ -53,27 +53,7 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-stefan">
-          <div class="image">
-            <img class="profile-photo" src="../images/stefan_swanepoel-profile-1024x683.png" />
-          </div>
-          <div class="info">
-            <div class="name">Stefan Swanepoe</div>
-            <div class="title">Chief Scientist</div>
-          </div>
-        </div>
-
-        <div class="profile-container" id="01-ray">
-          <div class="image">
-            <img class="profile-photo" src="../images/ray_novarina-profile-2700.jpg" />
-          </div>
-          <div class="info">
-            <div class="name">Ray Novarina</div>
-            <div class="title">Vice President Engineering</div>
-          </div>
-        </div>
-
-        <div class="profile-container" id="01-doug">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/doug_hozer-profile_img.png" />
           </div>
@@ -83,7 +63,27 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-jamer">
+        <div class="profile-container">
+          <div class="image">
+            <img class="profile-photo" src="../images/stefan_swanepoel-profile-1024x683.png" />
+          </div>
+          <div class="info">
+            <div class="name">Stefan Swanepoe</div>
+            <div class="title">Chief Scientist</div>
+          </div>
+        </div>
+
+        <div class="profile-container">
+          <div class="image">
+            <img class="profile-photo" src="../images/ray_novarina-profile-2700.jpg" />
+          </div>
+          <div class="info">
+            <div class="name">Ray Novarina</div>
+            <div class="title">Vice President Engineering</div>
+          </div>
+        </div>
+
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/jamer_hunt.jpg" />
           </div>
@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-james">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/james_glasnapp_parc-2.jpg" />
           </div>
@@ -103,7 +103,7 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-leslie">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/leslie_none-372c965.jpg" />
           </div>
@@ -113,7 +113,7 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-michael">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/michael-asmar.jpg" />
           </div>
@@ -123,7 +123,7 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-steve">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/steve_smith-profile-picture.jpg" />
           </div>
@@ -133,7 +133,7 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-mock">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/mock-profile.jpg" />
           </div>
@@ -143,7 +143,7 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-reema">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/reema_arya-profile.jpg" />
           </div>
@@ -153,7 +153,7 @@
           </div>
         </div>
 
-        <div class="profile-container" id="01-juliana">
+        <div class="profile-container">
           <div class="image">
             <img class="profile-photo" src="../images/juliana_bastos-profile_pic.jpg" />
           </div>
@@ -170,7 +170,24 @@
     <div class="col-xs-12 col-sm-10 css-management-bio-column">
       <div class="bios-container">
 
-        <div class="row bio-container" id="bio-01-gina">
+        <div class="row bio-container bio-active" active_id = "" active_idx="">
+          <div class="col-sm-5">
+            <div class="info">
+              <div class="name">name</div>
+              <div class="title">title</div>
+              <div class="short-bio">
+                short-bio
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="image">
+              <img class="profile-photo" src=""/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row bio-container">
           <div class="col-sm-5">
             <div class="info">
               <div class="name">Gina Mina, PhD</div>
@@ -183,46 +200,12 @@
           </div>
           <div class="col-sm-5">
             <div class="image">
-              <img class="profile-photo" src="../images/gina_5580042-profile-halftone-image-generator.png" />
+              <img class="profile-photo" src="../images/gina_5580042-profile-halftone-image-generator.png"/>
             </div>
           </div>
         </div>
 
-        <div class="row bio-container" id="bio-01-stefan">
-          <div class="col-sm-5">
-            <div class="info">
-              <div class="name">Stefan Swanepoe</div>
-              <div class="title">Chief Scientist</div>
-              <div class="short-bio">
-                Stefan leads the Science organization at The Climate Corporation, where he drives the company’s research and development efforts in data science, measurement and field research. Sam’s connection to agriculture started young, growing up on a grain and livestock farm in west-central Illinois. He brings more than two decades of experience in plant breeding and global agricultural development – contributing nearly 60 publications and patents relating to advances in agricultural technology. Prior to joining The Climate Corporation, Stefan led Monsanto’s Global Plant Breeding team, overseeing one of the largest, most integrated plant genetics programs in the world. He holds a B.S., M.S. and Ph.D. in genetics and plant breeding from the University of Illinois at Champaign-Urbana.
-              </div>
-            </div>
-          </div>
-            <div class="col-sm-5">
-              <div class="image">
-                <img class="profile-photo" src="../images/stefan_swanepoel-halftone-image-generator.png" />
-              </div>
-            </div>
-          </div>
-
-          <div class="row bio-container" id="bio-01-ray">
-            <div class="col-sm-5">
-              <div class="info">
-                <div class="name">Ray Novarina</div>
-                <div class="title">Vice President Engineering</div>
-                <div class="short-bio">
-                  Ray leads the The Climate Corporation's Engineering team. He has more than 15 years of experience leading the development of large-scale systems in a variety of industries. Prior to The Climate Corporation, Brian worked at Orbitz as a Senior Architect responsible for the development of their distributed service platform and overall architecture. Before Orbitz, Brian worked at the investment bank UBS where he built global interest rate trading systems. He has contributed frequently to the open source community, including having been the lead developer for the Jython project. He holds a B.S. in Finance from the University of Illinois at Champaign.
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-5">
-              <div class="image">
-                <img class="profile-photo" src="../images/ray_novarina-halftone-image-generator.png" />
-              </div>
-            </div>
-        </div>
-
-        <div class="row bio-container" id="bio-01-doug">
+        <div class="row bio-container">
           <div class="col-sm-5">
             <div class="info">
               <div class="name">Doug Hozer</div>
@@ -239,7 +222,41 @@
           </div>
         </div>
 
-        <div class="row bio-container" id="bio-01-jamar">
+        <div class="row bio-container">
+          <div class="col-sm-5">
+            <div class="info">
+              <div class="name">Stefan Swanepoe</div>
+              <div class="title">Chief Scientist</div>
+              <div class="short-bio">
+                Stefan leads the Science organization at The Climate Corporation, where he drives the company’s research and development efforts in data science, measurement and field research. Sam’s connection to agriculture started young, growing up on a grain and livestock farm in west-central Illinois. He brings more than two decades of experience in plant breeding and global agricultural development – contributing nearly 60 publications and patents relating to advances in agricultural technology. Prior to joining The Climate Corporation, Stefan led Monsanto’s Global Plant Breeding team, overseeing one of the largest, most integrated plant genetics programs in the world. He holds a B.S., M.S. and Ph.D. in genetics and plant breeding from the University of Illinois at Champaign-Urbana.
+              </div>
+            </div>
+          </div>
+            <div class="col-sm-5">
+              <div class="image">
+                <img class="profile-photo" src="../images/stefan_swanepoel-halftone-image-generator.png" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row bio-container">
+            <div class="col-sm-5">
+              <div class="info">
+                <div class="name">Ray Novarina</div>
+                <div class="title">Vice President Engineering</div>
+                <div class="short-bio">
+                  Ray leads the The Climate Corporation's Engineering team. He has more than 15 years of experience leading the development of large-scale systems in a variety of industries. Prior to The Climate Corporation, Brian worked at Orbitz as a Senior Architect responsible for the development of their distributed service platform and overall architecture. Before Orbitz, Brian worked at the investment bank UBS where he built global interest rate trading systems. He has contributed frequently to the open source community, including having been the lead developer for the Jython project. He holds a B.S. in Finance from the University of Illinois at Champaign.
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="image">
+                <img class="profile-photo" src="../images/ray_novarina-halftone-image-generator.png" />
+              </div>
+            </div>
+        </div>
+
+        <div class="row bio-container">
           <div class="col-sm-5">
             <div class="info">
               <div class="name">Jamar Hunt</div>
@@ -258,8 +275,346 @@
 
     </div>
 
-  <script src="../js/management.js"></script>
-  <script src="../js/exploding-lib.js"></script>
+  <!-- script src="../js/exploding-lib.js"></script -->
+  <!-- script src="../js/management.js"></script -->
+
+<script>
+  function statusLog( msg, plugIn) {
+    return;
+    if ( $( ".init-done" ).length == 0) {
+      $( ".init-status" ).append( msg );
+    } else {
+      if (msg.indexOf("*11-requestAnimationFrame") != -1) {
+        var img_src = $('.explode').find('img:first-child').attr('src');
+        var name = img_src.slice( img_src.indexOf('/') + 1, img_src.indexOf('_') );
+        var cycles = parseInt($( ".cycle-status" ).attr('cycles'));
+        if(plugIn.options.direction == 'out') {
+          if ( cycles == 2) {
+            $( ".cycle-status" ).html( "");
+            cycles = 0;
+          }
+        } else {
+          cycles += 1;
+        }
+        $( ".cycle-status" ).append( "<br />" + "**" + name + "**...");
+        $( ".cycle-status" ).attr('cycles', cycles + '');
+      }
+      $( ".cycle-status" ).append( msg );
+    }
+  };
+
+  statusLog( "  ..*1-uponLoad*" );
+
+  $(function() {
+    // Bind events and initialize plugin
+    statusLog( "  ..*2-domReady*" );
+    // $('.explode')
+      // .on('pixellate-exploded', function() {
+      //   var self = this;
+      //   setTimeout(function() {
+      //     $(self).pixellate('in');
+      //   }, 500);
+      // })
+      // .on('pixellate-imploded', function() {
+      //   var self = this;
+      //   setTimeout(function() {
+      //    $(self).pixellate('out');
+      //   }, 2000);
+      // })
+      // .pixellate();
+
+        // <div class="row bio-container bio-active" active_id = "" active_idx="">
+        //   <div class="col-sm-5">
+        //     <div class="info">
+        //       <div class="name">name</div>
+        //       <div class="title">title</div>
+        //       <div class="short-bio">
+        //         short-bio
+        //       </div>
+        //     </div>
+        //   </div>
+        //   <div class="col-sm-5">
+        //     <div class="image">
+        //       <img class="profile-photo" src=""/>
+        //     </div>
+        //   </div>
+        // </div>
+
+    // 'id', 'bio-idx', 'profile-idx' id="bio-01-jamar"
+    $.each( $( '.profile-container' ).toArray(), function( index, el ) {
+      img_src = $(el).find('img').attr('src');
+      name = img_src.slice( img_src.indexOf('/images') + ('/images'.length + 1), img_src.indexOf('_') );
+      $(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
+      $(el).attr('profile-idx', index + '');
+      $(el).attr('bio-idx', index + 1 + ''); // first bio is sandbox.
+    });
+
+    $.each( $( '.bio-container' ).toArray(), function( index, el ) {
+      img_src = $(el).find('img').attr('src');
+      name = img_src.slice( img_src.indexOf('/images') + ('/images'.length + 1), img_src.indexOf('_') );
+      $(el).attr( 'id', ('bio-' + (index + '') + '-' + name) );
+      $(el).attr('bio-idx', index + '');
+      $(el).attr('profile-idx', index - 1 + ''); // first bio is sandbox.
+      $(el).find('.image').addClass('explode');
+    });
+
+    var $active_bio = $('.bio-active'),
+        $default_bio = $( $('.bio-container').toArray()[parseInt(defaults.active_profile_idx)] );
+
+    $active_bio.attr('active_id', $default_bio.attr('id'));
+    $active_bio.attr('active_idx', $default_bio.attr('bio-idx'));
+    $active_bio.find('.name').html($default_bio.find('.name').html());
+    $active_bio.find('.title').html($default_bio.find('.title').html());
+    $active_bio.find('.short-bio').html($default_bio.find('.short-bio').html());
+    $active_bio.find('img').attr('src', $default_bio.find('img').attr('src'));
+
+    $.each( $( '.bio-container' ).find('.image').toArray(), function( index, el ) {
+      $(el).addClass('explode');
+    });
+
+    var $img_div = $('.explode');
+    setTimeout(function() {
+      $img_div.pixellate('init'); // fragment image, store in $pixel array as <span> elements.
+      $img_div.removeClass('pixellate-lock');
+      $( ".init-status" ).addClass('init-done');
+      $img_div.pixellate('out');  // explode image via $pixel array, update spans.
+      $img_div.pixellate('in');   // recreate from $pixel for initial view.
+      // $img_div.data('pixellate-image-el').css('visibility', 'hidden');
+      //setTimeout(function() {
+      //  $img_div.pixellate('out');
+      //  setTimeout(function() {
+      //    $img_div.pixellate('in');
+      //  }, 2000);
+      //}, 1000);
+    }, 1000);
+    // statusLog( "  ..*3-after domReadyPixellate()*" );
+    // $( ".init-status" ).addClass('init-done');
+
+    $.each( $( '.profile-container' ).toArray(), function( index, el ) {
+      // alert( index + ": " + $(el).attr('id') );
+      //$profile = $('#profile-01-gina');
+      $(el).click(function(attribs) {
+        var self = $(attribs.currentTarget);
+        //alert( 'Clicked on \'' + self.attr('id') + '\'' +
+        //       '.  Active halftone profile: ' + $active_bio.attr('active_idx') + ':' + $active_bio.attr('active_id')
+        //);
+        $source_bio = $( $('.bio-container').toArray() [ parseInt(self.attr('bio-idx')) ] );
+        $active_bio.attr('active_id', $source_bio.attr('id'));
+        $active_bio.attr('active_idx', $source_bio.attr('bio-idx'));
+        $active_bio.find('.name').html($source_bio.find('.name').html());
+        $active_bio.find('.title').html($source_bio.find('.title').html());
+        $active_bio.find('.short-bio').html($source_bio.find('.short-bio').html());
+        $active_bio.find('img').attr('src', $source_bio.find('img').attr('src'));
+
+      });
+    });
+  });
+
+
+  var pluginName = 'pixellate',
+      defaults = {
+        // Grid divisions
+        columns: 20,
+        rows: 20,
+
+        // Duration of explosion animation
+        duration: 1500,
+
+        // Direction of explosion animation ('out', 'in', or 'none')
+        direction: 'out',
+
+        // Resize pixels during animation
+        scale: true,
+
+        // Coordinates representing the source of the explosion force
+        //(e.g. [-1, 1] makes the explodey bits go up and to the right)
+        explosionOrigin: [0,0],
+
+        active_profile_idx: "01"
+      };
+  statusLog( "  ..*4-global data done*" );
+
+  function Plugin(el, options) {
+    statusLog( "  ..*5-creating Plugin: for class: " + $(el).attr('class') + "*"); // direction = '" + defaults.direction + "'*");
+    this.$el = $(el);
+    this.options = $.extend({}, defaults, options);
+    this._defaults = defaults;
+    this._name = pluginName;
+
+    this.init();
+    statusLog( "  ..*6-Plugin init done.*" );
+  };
+
+  Plugin.prototype = {
+    init: function() {
+      // Note: this.$el = '<div class=".explode"'>
+      statusLog( "  ..*7-Plugin init*"); // " for this.$el.attr('class'): " + this.$el.attr('class') + "*");
+      // this.$el = PlugIn instance's '.explode' container div.
+      // this.$el.pixellate-pixel is an array of spans for each image fragment.
+      if(!this.$el.find('.pixellate-pixel').length) {
+        var $img = this.$el.find('img:first-child'),
+            img = new Image();
+
+        this.$el
+          .data('pixellate-image-src', $img.attr('src'))
+          .data('pixellate-image-el', $img)
+          .addClass('pixellate-lock');
+        // $img.css('visibility', 'hidden');
+
+        $(img).one('load', $.proxy(this.createPixels, this));
+
+        img.src = this.$el.data('pixellate-image-src');
+        if(img.complete) {
+          $(img).trigger('load');
+        }
+      } else {
+        this.stylePixels();
+      }
+    },
+
+    createPixels: function() {
+      this.$el.append(new Array((this.options.rows * this.options.columns) + 1).join('<span class="pixellate-pixel"></span>'));
+      statusLog( "  ..*9-createPixels: pixellate-pixel[ ].length = '" + this.$el.find('.pixellate-pixel').length + "'*");
+
+      this.stylePixels(true);
+      },
+
+    stylePixels: function(initializeStyles) {
+      statusLog( "  ..*10-stylePixels(" + this.options.direction +")" + (initializeStyles ? " initializeStyles:" + initializeStyles : "") + "*" );
+      var self = this,
+          w = this.$el.width(),
+          h = this.$el.height(),
+          columns = this.options.columns,
+          rows = this.options.rows,
+          $pixels = this.$el.find('.pixellate-pixel');
+
+      // $('.explode').find('.pixellate-pixel')[0] (length of array = 400)
+      // <span class="pixellate-pixel"
+      //    style="
+      //       position: absolute;
+      //       width: 20px; height: 20px;
+      //       background-image: url(&quot;./5580042-profile-pictures_halftone-image-generator.png&quot;);
+      //       background-size: 400px auto;
+      //       backface-visibility: hidden;
+      //       left: 0px; top: 0px;
+      //       background-position: 0px 0px;
+      //       transform: none;
+      //       opacity: 1;
+      //       transition: all 1500ms ease-in-out 0s;">
+
+      var styles = initializeStyles ? {
+        'position': 'absolute',
+        'width': (w / columns),
+        'height': (h / rows),
+        'background-image': 'url('+this.$el.data('pixellate-image-src')+')',
+        'background-size': w,
+        'backface-visibility': 'hidden'
+      } : {};
+
+      for(var idx = 0; idx < $pixels.length; idx++) {
+        var pixelStyles = {};
+
+        if(initializeStyles) {
+          var x = (idx % columns) * styles.width,
+              y = (Math.floor(idx / rows)) * styles.height;
+
+          $.extend(pixelStyles, styles, {
+            'left': x,
+            'top': y,
+            'background-position': (-x)+'px '+(-y)+'px'
+          });
+        } else {
+
+        if(self.options.direction == 'out') {
+          var randX = (Math.random() * 300) - 150 - (self.options.explosionOrigin[0] * 150),
+              randY = (Math.random() * 300) - 150 - (self.options.explosionOrigin[1] * 150);
+
+          var transformString = 'translate('+randX+'px, '+randY+'px)';
+          if(self.options.scale) {
+            transformString += ' scale('+(Math.random() * 1.5 + 0.5)+')';
+          }
+
+          $.extend(pixelStyles, {
+            'transform': transformString,
+            'opacity': 0,
+            'transition': self.options.duration+'ms ease-out'
+          });
+        } else if(self.options.direction == 'in') {
+          $.extend(pixelStyles, {
+            'transform': 'none',
+            'opacity': 1,
+            'transition': self.options.duration+'ms ease-in-out'
+          });
+        }
+        }
+
+        $pixels.eq(idx).css(pixelStyles);
+      }
+
+      // Use rAF to ensure styles are set before class is modified
+      // requestAnimationFrame(function() {
+      //   statusLog( "  ..*11-requestAnimationFrame: direction = '" + self.options.direction + "'*", self);
+      //   if(self.options.direction == 'out') {
+      //     self.$el.removeClass('pixellate-lock');
+      //   } else if(self.options.direction == 'in') {
+          // self.$el.one('pixellate-imploded', function() {
+          //   self.$el.addClass('pixellate-lock');
+          // });
+      //     self.$el.addClass('pixellate-lock');
+      //   }
+      // });
+
+      // Fire plugin events after animation completes
+      // TODO: Use transition events when supported
+      // setTimeout(function() {
+      //   if(self.options.direction == 'out')
+      //     self.$el.trigger('pixellate-exploded');
+      //   else if(self.options.direction == 'in')
+      //     self.$el.trigger('pixellate-imploded');
+      // }, this.options.duration);
+    }
+  };
+
+  $.fn[ pluginName ] = function ( options ) {
+    return this.each(function() {
+      // Note: this = '<div class=".explode"'>
+      if ( !$.data( this, "plugin_" + pluginName ) ) {
+        statusLog( "  ..*5b: $.fn[ " + pluginName + " ]*" );
+        $.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
+      } else if(typeof options === 'string') {
+        statusLog( "  ..*5c: $.fn[ " + pluginName + " ] direction: " + options + "*" );
+        $.data( this, "plugin_" + pluginName ).options.direction = options;
+        $.data( this, "plugin_" + pluginName ).init();
+      }
+    });
+  };
+
+
+  // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
+  // MIT license
+  var lastTime = 0;
+  var vendors = ['ms', 'moz', 'webkit', 'o'];
+  for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+    window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+    window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+  }
+
+  if (!window.requestAnimationFrame)
+    window.requestAnimationFrame = function(callback, element) {
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+        var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+          timeToCall);
+        lastTime = currTime + timeToCall;
+        return id;
+    };
+
+  if (!window.cancelAnimationFrame)
+    window.cancelAnimationFrame = function(id) {
+        clearTimeout(id);
+    };
+  //statusLog( "  ..*12: Add window.request/cancelAnimationFrame()*" );
+</script>
 
 </body>
 </html>
