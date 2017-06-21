@@ -12,14 +12,15 @@ exp_statusLog( "  ..*1-uponLoad*" );
 $(function() {
   exp_statusLog( "  ..*2-domReady*" );
   exp_init(this);
-
+  exp_convert_data_to_html(this);
+  exp_build_default_view(this);
+  exp_statusLog( "  ..*3-Init done*" );
 });
 
-// Upon startup, create Plugin one time. For each instance of a 'explode' class,
-// attach the plugin instance to that div, and run the pixellate.init() method
-// against it.
+// The 'pixellate()' plugin operates on a bio div 'explode' class.
+// Create and attach the plugin instance to that div, and run the
+// pixellate.init() method against it.
 $.fn[ exp_pluginName ] = function ( options ) {
-  //exp_statusLog( "  ..*5a: $.fn[ " + exp_pluginName + " ] START: Create and init plugin for each Profile div *" );
   return this.each(function() {
     // Note: this = '<div class=".explode"'>
     if ( !$.data( this, "plugin_" + exp_pluginName ) ) {

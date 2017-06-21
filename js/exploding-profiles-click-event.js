@@ -6,7 +6,14 @@ function exp_add_click_handler( $active_bio, profile_idx, profile_div) {
     //alert( 'Clicked on \'' + self.attr('id') + '\'' +
     //       '.  Active halftone profile: ' + $active_bio.attr('active_idx') + ':' + $active_bio.attr('active_id')
     //);
-    $source_bio = $( $('.bio-container').toArray() [ parseInt(self.attr('bio-idx')) ] );
+    var $active_bio = $('.bio-active'),
+        $source_bio = $( $('.bio-container').toArray() [ parseInt(self.attr('bio-idx')) ] );
+
+    $( ".cycle-status" ).html( "<br />" + "**" + $source_bio.attr('id') + "**..." );
+    exp_statusLog( "  ..*16  Clicked on '" + self.attr('id') +
+                   "'.  Active halftone profile: " + $active_bio.attr('active_idx') + ":" +
+                   $active_bio.attr('active_id') + "*" );
+
     $active_bio.attr('active_id', $source_bio.attr('id'));
     $active_bio.attr('active_idx', $source_bio.attr('bio-idx'));
     $active_bio.find('.name').html($source_bio.find('.name').html());
@@ -14,10 +21,9 @@ function exp_add_click_handler( $active_bio, profile_idx, profile_div) {
     $active_bio.find('.short-bio').html($source_bio.find('.short-bio').html());
     $active_bio.find('img').attr('src', $source_bio.find('img').attr('src'));
 
-    $( ".cycle-status" ).html( "<br />" + "**" + $source_bio.attr('id') + "**..." );
     $active_bio.find('.image').pixellate('out');  // explode top/active page image via $pixel array, update spans.
-    $source_bio.find('.image').pixellate('out');
-    //$img_div.pixellate('in');   // recreate from $pixel for initial view.
+
+    //$source_bio.find('.image').pixellate('out');
 
   });
 };

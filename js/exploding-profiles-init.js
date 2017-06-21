@@ -48,6 +48,10 @@ if (!window.cancelAnimationFrame)
 exp_statusLog( "  ..*12: Add window.request/cancelAnimationFrame()*" );
 
 function exp_init( self ) {
+  // hide current page contents:
+};
+
+function exp_convert_data_to_html( self ) {
   // Bind events and initialize plugin
 
       // <div class="row bio-container bio-active" active_id = "" active_idx="">
@@ -68,6 +72,7 @@ function exp_init( self ) {
       // </div>
 
   exp_statusLog( "  ..*13: exp_init(): START data to html conversion.*" );
+  var $active_bio = $('.bio-active')
   // 'id', 'bio-idx', 'profile-idx' id="bio-01-jamar"
   $.each( $( '.profile-container' ).toArray(), function( index, el ) {
     img_src = $(el).find('img').attr('src');
@@ -75,6 +80,9 @@ function exp_init( self ) {
     $(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
     $(el).attr('profile-idx', index + '');
     $(el).attr('bio-idx', index + 1 + ''); // first bio is sandbox.
+  });
+  $.each( $( '.profile-container' ).toArray(), function( index, el ) {
+    exp_add_click_handler( $active_bio, index, el);
   });
 
   $.each( $( '.bio-container' ).toArray(), function( index, el ) {
@@ -85,7 +93,11 @@ function exp_init( self ) {
     $(el).attr('profile-idx', index - 1 + ''); // first bio is sandbox.
     $(el).find('.image').addClass('explode');
   });
+  exp_statusLog( "  ..*14: exp_init(): END data to html conversion.*" );
+};
 
+function exp_build_default_view( self ) {
+  exp_statusLog( "  ..*15: exp_init(): Create default bio image.*" );
   var $active_bio = $('.bio-active'),
       $default_bio = $( $('.bio-container').toArray()[parseInt(exp_defaults.active_profile_idx)] );
 
@@ -96,23 +108,11 @@ function exp_init( self ) {
   $active_bio.find('.short-bio').html($default_bio.find('.short-bio').html());
   $active_bio.find('img').attr('src', $default_bio.find('img').attr('src'));
 
-  $.each( $( '.bio-container' ).find('.image').toArray(), function( index, el ) {
-    $(el).addClass('explode');
-  });
-  exp_statusLog( "  ..*14: exp_init(): END data to html conversion.*" );
-
-  exp_statusLog( "  ..*15: exp_init(): Create default bio image.*" );
   var $img_div = $active_bio.find('.image'); // $('.explode');
   //$img_div.pixellate('init'); // fragment image, store in $pixel array as <span> elements.
   //$img_div.removeClass('pixellate-lock');
   $( ".init-status" ).addClass('init-done');
   //$img_div.pixellate('out');  // explode image via $pixel array, update spans.
   $img_div.pixellate('in');   // recreate from $pixel for initial view.
-  exp_statusLog( "  ..*3-after domReadyPixellate()*" );
-
-  $.each( $( '.profile-container' ).toArray(), function( index, el ) {
-    exp_add_click_handler( $active_bio, index, el);
-  });
   //$( ".init-status" ).addClass('init-done');
-
 };
