@@ -67,6 +67,7 @@ function exp_init( self ) {
       //   </div>
       // </div>
 
+  exp_statusLog( "  ..*13: exp_init(): START data to html conversion.*" );
   // 'id', 'bio-idx', 'profile-idx' id="bio-01-jamar"
   $.each( $( '.profile-container' ).toArray(), function( index, el ) {
     img_src = $(el).find('img').attr('src');
@@ -98,17 +99,20 @@ function exp_init( self ) {
   $.each( $( '.bio-container' ).find('.image').toArray(), function( index, el ) {
     $(el).addClass('explode');
   });
+  exp_statusLog( "  ..*14: exp_init(): END data to html conversion.*" );
 
-  var $img_div = $('.explode');
-  $img_div.pixellate('init'); // fragment image, store in $pixel array as <span> elements.
-  $img_div.removeClass('pixellate-lock');
+  exp_statusLog( "  ..*15: exp_init(): Create default bio image.*" );
+  var $img_div = $active_bio.find('.image'); // $('.explode');
+  //$img_div.pixellate('init'); // fragment image, store in $pixel array as <span> elements.
+  //$img_div.removeClass('pixellate-lock');
   $( ".init-status" ).addClass('init-done');
-  $img_div.pixellate('out');  // explode image via $pixel array, update spans.
+  //$img_div.pixellate('out');  // explode image via $pixel array, update spans.
   $img_div.pixellate('in');   // recreate from $pixel for initial view.
   exp_statusLog( "  ..*3-after domReadyPixellate()*" );
-  $( ".init-status" ).addClass('init-done');
 
   $.each( $( '.profile-container' ).toArray(), function( index, el ) {
     exp_add_click_handler( $active_bio, index, el);
   });
+  //$( ".init-status" ).addClass('init-done');
+
 };

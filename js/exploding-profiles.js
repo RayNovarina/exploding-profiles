@@ -5,31 +5,30 @@
 4) On click event:
 5) On scroll event:
 
-  <script src="../js/exploding-profiles-init.js"></script>
-  <script src="../js/exploding-profiles-lib.js"></script>
-  <script src="../js/exploding-profiles-click-event.js"></script>
-  <script src="../js/exploding-profiles-scroll-event.js"></script>
-  <script src="../js/exploding-profiles.js"></script>
+*/
 
- */
+exp_statusLog( "  ..*1-uponLoad*" );
 
- exp_statusLog( "  ..*1-uponLoad*" );
+$(function() {
+  exp_statusLog( "  ..*2-domReady*" );
+  exp_init(this);
 
- $(function() {
-   exp_statusLog( "  ..*2-domReady*" );
-   exp_init(this);
- });
+});
 
- $.fn[ exp_pluginName ] = function ( options ) {
-   return this.each(function() {
-     // Note: this = '<div class=".explode"'>
-     if ( !$.data( this, "plugin_" + exp_pluginName ) ) {
-       exp_statusLog( "  ..*5b: $.fn[ " + exp_pluginName + " ]*" );
-       $.data( this, "plugin_" + exp_pluginName, new Plugin( this, options ) );
-     } else if(typeof options === 'string') {
-       exp_statusLog( "  ..*5c: $.fn[ " + exp_pluginName + " ] direction: " + options + "*" );
-       $.data( this, "plugin_" + exp_pluginName ).options.direction = options;
-       $.data( this, "plugin_" + exp_pluginName ).init();
-     }
-   });
- };
+// Upon startup, create Plugin one time. For each instance of a 'explode' class,
+// attach the plugin instance to that div, and run the pixellate.init() method
+// against it.
+$.fn[ exp_pluginName ] = function ( options ) {
+  //exp_statusLog( "  ..*5a: $.fn[ " + exp_pluginName + " ] START: Create and init plugin for each Profile div *" );
+  return this.each(function() {
+    // Note: this = '<div class=".explode"'>
+    if ( !$.data( this, "plugin_" + exp_pluginName ) ) {
+      exp_statusLog( "  ..*5b: $.fn[ " + exp_pluginName + " ]*" );
+      $.data( this, "plugin_" + exp_pluginName, new Plugin( this, options ) );
+    } else if(typeof options === 'string') {
+      exp_statusLog( "  ..*5c: $.fn[ " + exp_pluginName + " ] direction: " + options + "*" );
+      $.data( this, "plugin_" + exp_pluginName ).options.direction = options;
+      $.data( this, "plugin_" + exp_pluginName ).init();
+    }
+  });
+};

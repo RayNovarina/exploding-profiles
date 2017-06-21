@@ -14,6 +14,7 @@ function exp_add_click_handler( $active_bio, profile_idx, profile_div) {
     $active_bio.find('.short-bio').html($source_bio.find('.short-bio').html());
     $active_bio.find('img').attr('src', $source_bio.find('img').attr('src'));
 
+    $( ".cycle-status" ).html( "<br />" + "**" + $source_bio.attr('id') + "**..." );
     $active_bio.find('.image').pixellate('out');  // explode top/active page image via $pixel array, update spans.
     $source_bio.find('.image').pixellate('out');
     //$img_div.pixellate('in');   // recreate from $pixel for initial view.

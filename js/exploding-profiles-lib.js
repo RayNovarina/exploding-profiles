@@ -23,7 +23,11 @@ function exp_statusLog( msg, plugIn) {
 
 
   function Plugin(el, options) {
-    exp_statusLog( "  ..*5-creating Plugin: for class: " + $(el).attr('class') + "*"); // direction = '" + exp_defaults.direction + "'*");
+    img_src = $(el).find('img').attr('src');
+    name = img_src.slice( img_src.indexOf('/images') + ('/images'.length + 1), img_src.indexOf('_') );
+    exp_statusLog( "  ..*5-creating Plugin: for " +
+                   name +
+                   ". On div class: " + $(el).attr('class') + "*"); // direction = '" + exp_defaults.direction + "'*");
     this.$el = $(el);
     this.options = $.extend({}, exp_defaults, options);
     this._defaults = exp_defaults;
@@ -36,7 +40,9 @@ function exp_statusLog( msg, plugIn) {
   Plugin.prototype = {
     init: function() {
       // Note: this.$el = '<div class=".explode"'>
-      exp_statusLog( "  ..*7-Plugin init*"); // " for this.$el.attr('class'): " + this.$el.attr('class') + "*");
+      // img_src = $(el).find('img').attr('src');
+      name = img_src.slice( img_src.indexOf('/images') + ('/images'.length + 1), img_src.indexOf('_') );
+      exp_statusLog( "  ..*7-Plugin init for " + name + "*"); // " for this.$el.attr('class'): " + this.$el.attr('class') + "*");
       // this.$el = PlugIn instance's '.explode' container div.
       // this.$el.pixellate-pixel is an array of spans for each image fragment.
       if(!this.$el.find('.pixellate-pixel').length) {
