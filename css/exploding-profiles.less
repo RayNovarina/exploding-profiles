@@ -18,7 +18,7 @@ body, html {
     .profile-container {
       padding: 6px;
       border-bottom: solid 2px #F0F8FF;
-      .image {
+      .profile-photo {
         float: left;
         img {
           width: 40px;
@@ -36,25 +36,16 @@ body, html {
           font-size: .8em;
         }
       }
-      .bio {
+      .short-bio {
         display: none;
-        .short-bio {
-          padding-top: 60px;
-          font-size: 1.3em;
-          line-height: 2em;
-          color: grey;
+      }
+      .bio-photo {
+        display: none;
+        img {
         }
-        .image {
-          padding-top: 20px;
-          padding-right: 10px;
-          img {
-            visibility: hidden;
-            width: 400px;
-            height: 400px;
-          }
-        }
-        .background-container {
-        }
+      }
+      .bio-pixell-array {
+        display: none;
       }
     }
   }
@@ -63,7 +54,6 @@ body, html {
 .css-management-bio-column {
   .bios-container {
     .bio-container {
-      border-bottom: dotted 4px grey;
       .info {
         padding-left: 4px;
         padding-top: 60px;
@@ -84,14 +74,11 @@ body, html {
           color: grey;
         }
       }
-      .image {
+      .bio-background-image {
         padding-top: 20px;
         padding-right: 10px;
-        img {
-          visibility: hidden;
-          width: 400px;
-          height: 400px;
-        }
+        width: 400px;
+        height: 400px;
       }
     }
   }

@@ -1,118 +1,63 @@
 
-var exp_pluginName = 'pixellate',
-    exp_defaults = {
-      // Grid divisions
-      columns: 20,
-      rows: 20,
-
-      // Duration of explosion animation
-      duration: 1500,
-
-      // Direction of explosion animation ('out', 'in', or 'none')
-      direction: 'out',
-
-      // Resize pixels during animation
-      scale: true,
-
-      // Coordinates representing the source of the explosion force
-      //(e.g. [-1, 1] makes the explodey bits go up and to the right)
-      explosionOrigin: [0,0],
-
-      active_profile_idx: "01"
-  };
-exp_statusLog( "  ..*4-global data done*" );
-
-// requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
-// MIT license
-var lastTime = 0;
-var vendors = ['ms', 'moz', 'webkit', 'o'];
-for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-  window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-  window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-}
-
-if (!window.requestAnimationFrame)
-  window.requestAnimationFrame = function(callback, element) {
-      var currTime = new Date().getTime();
-      var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-      var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-        timeToCall);
-      lastTime = currTime + timeToCall;
-      return id;
-  };
-
-if (!window.cancelAnimationFrame)
-  window.cancelAnimationFrame = function(id) {
-      clearTimeout(id);
-  };
-exp_statusLog( "  ..*12: Add window.request/cancelAnimationFrame()*" );
-
-function exp_init( self ) {
+function exp_init() {
   // hide current page contents:
 };
 
-function exp_convert_data_to_html( self ) {
+function exp_convert_data_to_html() {
   // Bind events and initialize plugin
-
-      // <div class="row bio-container bio-active" active_id = "" active_idx="">
-      //   <div class="col-sm-5">
-      //     <div class="info">
-      //       <div class="name">name</div>
-      //       <div class="title">title</div>
-      //       <div class="short-bio">
-      //         short-bio
-      //       </div>
-      //     </div>
-      //   </div>
-      //   <div class="col-sm-5">
-      //     <div class="image">
-      //       <img class="profile-photo" src=""/>
-      //     </div>
-      //   </div>
-      // </div>
+  /*
+  <div class="profile-container">
+    <div class="profile-photo">
+      <img src="../images/jamer_hunt.jpg" />
+    </div>
+    <div class="info">
+      <div class="name">Jamer Hunt</div>
+      <div class="title">Grunt 2</div>
+    </div>
+    <div class="short-bio">
+      Jamar is Grunt 2. He sorta leads the The Climate Corporation's Engineering team. He has more than 15 years of experience leading the development of large-scale systems in a variety of industries. Prior to The Climate Corporation, Brian worked at Orbitz as a Senior Architect responsible for the development of their distributed service platform and overall architecture. Before Orbitz, Brian worked at the investment bank UBS where he built global interest rate trading systems. He has contributed frequently to the open source community, including having been the lead developer for the Jython project. He holds a B.S. in Finance from the University of Illinois at Champaign.
+    </div>
+    <div class="bio-photo">
+      <img src="../images/jamar_hunt-halftone-image-generator.png" />
+    </div>
+  </div>
+  */
 
   exp_statusLog( "  ..*13: exp_init(): START data to html conversion.*" );
-  var $active_bio = $('.bio-active')
-  // 'id', 'bio-idx', 'profile-idx' id="bio-01-jamar"
+  globals.active_bio = $('.bio-active');
   $.each( $( '.profile-container' ).toArray(), function( index, el ) {
-    img_src = $(el).find('img').attr('src');
-    name = img_src.slice( img_src.indexOf('/images') + ('/images'.length + 1), img_src.indexOf('_') );
+    var name = $(el).find( '.name' ).html().split(' ')[0].toLowerCase();
     $(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
     $(el).attr('profile-idx', index + '');
-    $(el).attr('bio-idx', index + 1 + ''); // first bio is sandbox.
-  });
-  $.each( $( '.profile-container' ).toArray(), function( index, el ) {
-    exp_add_click_handler( $active_bio, index, el);
+    $(el).attr( 'profile-name', name );
+    exp_add_click_handler( globals.active_bio, index, el);
   });
 
+  /*
   $.each( $( '.bio-container' ).toArray(), function( index, el ) {
     img_src = $(el).find('img').attr('src');
     name = img_src.slice( img_src.indexOf('/images') + ('/images'.length + 1), img_src.indexOf('_') );
     $(el).attr( 'id', ('bio-' + (index + '') + '-' + name) );
     $(el).attr('bio-idx', index + '');
     $(el).attr('profile-idx', index - 1 + ''); // first bio is sandbox.
-    $(el).find('.image').addClass('explode');
+    //$(el).find('.image').addClass(globals.defaults.pixellate_class);
   });
+  */
+
   exp_statusLog( "  ..*14: exp_init(): END data to html conversion.*" );
 };
 
-function exp_build_default_view( self ) {
-  exp_statusLog( "  ..*15: exp_init(): Create default bio image.*" );
-  var $active_bio = $('.bio-active'),
-      $default_bio = $( $('.bio-container').toArray()[parseInt(exp_defaults.active_profile_idx)] );
+function exp_build_default_view() {
+  exp_statusLog( "  ..*15: exp_init(): Create default bio image from profile " + globals.defaults.active_profile_idx + ".*" );
+  globals.default_profile = $( $('.profile-container').toArray()[globals.defaults.active_profile_idx] );
 
-  $active_bio.attr('active_id', $default_bio.attr('id'));
-  $active_bio.attr('active_idx', $default_bio.attr('bio-idx'));
-  $active_bio.find('.name').html($default_bio.find('.name').html());
-  $active_bio.find('.title').html($default_bio.find('.title').html());
-  $active_bio.find('.short-bio').html($default_bio.find('.short-bio').html());
-  $active_bio.find('img').attr('src', $default_bio.find('img').attr('src'));
+  globals.active_bio.attr('active_id', globals.default_profile.attr('id'));
+  globals.active_bio.attr('active_idx', globals.default_profile.attr('profile-idx'));
+  globals.active_bio.find('.name').html(globals.default_profile.find('.name').html());
+  globals.active_bio.find('.title').html(globals.default_profile.find('.title').html());
+  globals.active_bio.find('.short-bio').html(globals.default_profile.find('.short-bio').html());
 
-  var $img_div = $active_bio.find('.image'); // $('.explode');
-  //$img_div.pixellate('init'); // fragment image, store in $pixel array as <span> elements.
-  //$img_div.removeClass('pixellate-lock');
-  $( ".init-status" ).addClass('init-done');
-  //$img_div.pixellate('out');  // explode image via $pixel array, update spans.
-  $img_div.pixellate('in');   // recreate from $pixel for initial view.
-  //$( ".init-status" ).addClass('init-done');
+  globals.default_profile.pixellate(); // chop up bio image into $pixel <span> array.
+
+  globals.active_bio.find('.bio-background-image').append( globals.default_profile.find('.bio-photo') );
 };
