@@ -4,24 +4,25 @@ function exp_add_click_handler( $active_bio, profile_idx, profile_div) {
   $(profile_div).click(function(attribs) {
     var self = $(attribs.currentTarget);
     //alert( 'Clicked on \'' + self.attr('id') + '\'' +
-    //       '.  Active halftone profile: ' + $active_bio.attr('active_idx') + ':' + $active_bio.attr('active_id')
+    //       '.  Active halftone profile: ' + globals.active_bio.attr('active_idx') + ':' + globals.active_bio.attr('active_id')
     //);
-    var $active_bio = $('.bio-active'),
-        $source_bio = $( $('.bio-container').toArray() [ parseInt(self.attr('bio-idx')) ] );
+    var $source_bio = $( $('.bio-container').toArray() [ parseInt(self.attr('bio-idx')) ] );
 
-    $( ".cycle-status" ).html( "<br />" + "**" + $source_bio.attr('id') + "**..." );
+    $( ".cycle-status" ).html( "<br />" + "**" + self.attr('id') + "**..." );
     exp_statusLog( "  ..*16  Clicked on '" + self.attr('id') +
-                   "'.  Active halftone profile: " + $active_bio.attr('active_idx') + ":" +
-                   $active_bio.attr('active_id') + "*" );
+                   "'.  Active halftone profile: " + globals.active_bio.attr('active_idx') + ":" +
+                   globals.active_bio.attr('active_id') + "*" );
 
-    $active_bio.attr('active_id', $source_bio.attr('id'));
-    $active_bio.attr('active_idx', $source_bio.attr('bio-idx'));
-    $active_bio.find('.name').html($source_bio.find('.name').html());
-    $active_bio.find('.title').html($source_bio.find('.title').html());
-    $active_bio.find('.short-bio').html($source_bio.find('.short-bio').html());
-    $active_bio.find('img').attr('src', $source_bio.find('img').attr('src'));
+    // NOTE: move divs back to profile first before we append new?
 
-    $active_bio.find('.image').pixellate('out');  // explode top/active page image via $pixel array, update spans.
+    globals.active_bio.attr('active_id', self.attr('id'));
+    globals.active_bio.attr('active_idx', self.attr('profile-idx'));
+    globals.active_bio.find('.name').html(self.find('.name').html());
+    globals.active_bio.find('.title').html(self.find('.title').html());
+    globals.active_bio.find('.short-bio').html(self.find('.short-bio').html());
+    //globals.active_bio.find('img').attr('src', $source_bio.find('img').attr('src'));
+
+    globals.active_bio.pixellate('out');  // explode top/active page image via $pixel array, update spans.
 
     //$source_bio.find('.image').pixellate('out');
 

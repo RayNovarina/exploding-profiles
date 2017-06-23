@@ -30,8 +30,14 @@ function exp_convert_data_to_html() {
     $(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
     $(el).attr('profile-idx', index + '');
     $(el).attr( 'profile-name', name );
+    if (index > 0) {
+      $( ".init-status" ).addClass('status-ignore');
+    }
+    $(el).pixellate(''); // chop up bio image into $pixel <span> array.
+    $(el).pixellate('out'); // initial state is an exploded image.
     exp_add_click_handler( globals.active_bio, index, el);
   });
+  $( ".init-status" ).removeClass('status-ignore');
 
   /*
   $.each( $( '.bio-container' ).toArray(), function( index, el ) {
@@ -57,7 +63,78 @@ function exp_build_default_view() {
   globals.active_bio.find('.title').html(globals.default_profile.find('.title').html());
   globals.active_bio.find('.short-bio').html(globals.default_profile.find('.short-bio').html());
 
-  globals.default_profile.pixellate(); // chop up bio image into $pixel <span> array.
+  var name = globals.default_profile.find( '.name' ).html().split(' ')[0].toLowerCase();
+  globals.active_bio.attr('id', ('active_bio_for_profile-' + (globals.defaults.active_profile_idx + '') + '-' + name) );
+  globals.active_bio.find('.name').html(globals.default_profile.find('.name').html());
+  globals.active_bio.attr( 'bio-name', name );
+  /*
+  <div class="col-sm-5">
+    // bio-container bio-active
+    <div class="bio-background-image"></div>
+    // profile-container
+    <div class="short-bio"></div>
+    <div class="bio-photo">
+      <img src="../images/laura_oliphant-halftone-image-generator-smart-2-bright-verysmall.png"/>
+    </div>
+    <div class="bio-pixell-array"></div>
+  </div>
+   */
 
-  globals.active_bio.find('.bio-background-image').append( globals.default_profile.find('.bio-photo') );
+  // 1a) Move original halftone-profile image file into bio display page.
+  // 'div.bio-container'.bio-active'.find('
+  //                    .bio-background-image')
+  //                    .append( 'div.profile-container id="gina"'.find(
+  //                             '.bio-photo') );
+  //
+  //globals.active_bio.find( globals.pixellate_target_class_ref )
+  //                  .append( globals.default_profile.find(globals.pixellate_photo_class_ref ) );
+
+  // 1b) Move profile pixell array of spans into bio display page.
+  // 'div.bio-container'.bio-active'.find('
+  //                    .bio-background-image')
+  //                    .append( 'div.profile-container id="gina"'.find(
+  //                             '.bio-pixell-array') );
+  //
+  //globals.active_bio.find( globals.pixellate_target_class_ref )
+  //                  .append( globals.default_profile.find(globals.pixellate_pixels_container_class_ref ) );
+
+  // 2) Wait two seconds and chop up bio image into bio-active-container $pixel <span> array.
+  setTimeout(function() {
+    globals.active_bio.pixellate('');
+    // 3) Wait two more seconds and Put the original halftone-profile image file back to the profile page.
+    setTimeout(function() {
+      globals.active_bio.find( '.bio-photo' )
+                        .insertAfter( globals.default_profile.find('.short-bio') );
+      // 4) Wait two more seconds and explode the halftone image.
+      setTimeout(function() {
+        globals.active_bio.pixellate( 'out' );
+        // 5) Wait four more seconds and implode/rebuild halftone image.
+        setTimeout(function() {
+          globals.active_bio.pixellate( 'in' );
+        }, 4000);
+      }, 2000);
+    }, 2000);
+}, 2000);
+
+  // 2) Wait two seconds and Move pixellated image into bio display page.
+  //setTimeout(function() {
+    // NOTE: initial state of default profile is an exploded image.
+    // 2a) implode back to pixellated image.
+    //globals.default_profile.pixellate( 'in' );
+    // 2b) Put the original halftone-profile image file back to the profile page.
+    //globals.active_bio.find( '.bio-photo' )
+    //                  .insertAfter( globals.default_profile.find('.short-bio') );
+    // 2c) Move pixellated image into bio display page.
+    //globals.active_bio.find( '.bio-background-image' )
+    //                  .append( globals.default_profile.find('.bio-pixell-array' ) );
+    // 3) Wait two more seconds and explode halftone image.
+  //  setTimeout(function() {
+    //  globals.active_bio.pixellate( 'in' );
+    //  globals.active_bio.pixellate( 'out' );
+    //  // 4) Wait one more second and rebuild halftone image.
+    //  setTimeout(function() {
+    //    globals.active_bio.pixellate( 'in' );
+    //  }, 1000);
+  //  }, 2000);
+  // }, 2000);
 };

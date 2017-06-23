@@ -80,8 +80,8 @@ Plugin.prototype = {
   stylePixels: function(initializeStyles) {
     exp_statusLog( "  ..*10-stylePixels( " + (initializeStyles ? "onlyInitStyles" : this.options.direction) + " )*" );
     var self = this,
-        w = this.$el.width(),
-        h = this.$el.height(),
+        w = this.$el.find(globals.pixellate_pixels_container_class_ref).width(),
+        h = this.$el.find(globals.pixellate_pixels_container_class_ref).height(),
         columns = this.options.columns,
         rows = this.options.rows,
         $pixels = this.$el.find('.pixellate-pixel');
