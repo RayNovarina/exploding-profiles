@@ -1,30 +1,26 @@
 
-function exp_add_click_handler( $active_bio, profile_idx, profile_div) {
-  // alert( index + ": " + $(el).attr('id') );
+function exp_add_click_handler( profile_idx, profile_div) {
   $(profile_div).click(function(attribs) {
     var self = $(attribs.currentTarget);
     //alert( 'Clicked on \'' + self.attr('id') + '\'' +
     //       '.  Active halftone profile: ' + globals.active_bio.attr('active_idx') + ':' + globals.active_bio.attr('active_id')
     //);
-    var $source_bio = $( $('.bio-container').toArray() [ parseInt(self.attr('bio-idx')) ] );
+    var clicked_profile_idx = parseInt( self.attr('profile-idx') ),
+        active_bio_idx = parseInt( $( globals.bio_containers_class_ref ).attr('active_bio_idx') ),
+        active_bio = $( $('.bio-container').toArray()[ active_bio_idx ] );
 
-    $( ".cycle-status" ).html( "<br />" + "**" + self.attr('id') + "**..." );
+    $( ".cycle-status" ).html( "<br />" + "**" + self.attr('id') + "**..." ); // Reset msg area, erase old.
     exp_statusLog( "  ..*16  Clicked on '" + self.attr('id') +
-                   "'.  Active halftone profile: " + globals.active_bio.attr('active_idx') + ":" +
-                   globals.active_bio.attr('active_id') + "*" );
+                   "'.  Active halftone profile: " + active_bio.attr('active_idx') + ":" +
+                   active_bio.attr('active_id') + "*" );
 
-    // NOTE: move divs back to profile first before we append new?
-
-    globals.active_bio.attr('active_id', self.attr('id'));
-    globals.active_bio.attr('active_idx', self.attr('profile-idx'));
-    globals.active_bio.find('.name').html(self.find('.name').html());
-    globals.active_bio.find('.title').html(self.find('.title').html());
-    globals.active_bio.find('.short-bio').html(self.find('.short-bio').html());
-    //globals.active_bio.find('img').attr('src', $source_bio.find('img').attr('src'));
-
-    globals.active_bio.pixellate('out');  // explode top/active page image via $pixel array, update spans.
-
-    //$source_bio.find('.image').pixellate('out');
-
+    // explode halftone image background of active bio, restore updated content
+    // of active bio to its profile.
+    swap_out_bio( active_bio_idx , 'explode', 1500,
+    /*1-Callback when done*/ function() {
+    // swap in clicked profile into active bio slot, implode/recreate the bio image.
+    swap_in_bio( clicked_profile_idx, 'implode', 0,
+    /*2-Callback when done*/ function() {
+    /*2-*/})/*1-*/});
   });
 };

@@ -9,27 +9,30 @@
 //                   exp_build_default_view(L111): var $img_div = $active_bio.find('.image'); // $('.bio-container');
 //                   exp_build_default_view(L116) --> $img_div.pixellate('in');
 //                                                sooo.... this is set to the elem that is calling pixellete()
-$.fn[ globals.pluginName ] = function ( options ) {
+$.fn[ globals.pluginName ] = function ( options, $pix_obj ) {
   return this.each(function() {
     // Note: 'this' is the object (HTML '<div class="bio-container"'>) that this method is an attrib of.
     if ( !$.data( this, globals.pluginInstanceName ) ) {
       // This 'profile-container' div does not have a 'plugin_pixellate' method in its jquery data hash.
-      exp_statusLog( "  ..*5b: $.fn[ " + globals.pluginName + " ](" + options + ")*" );
-      $.data( this, globals.pluginInstanceName, new Plugin( this, options ) );
+      exp_statusLog( "  ..*5b: $.fn[ " + globals.pluginName + " ]*" );
+      $.data( this, globals.pluginInstanceName, new Plugin( this, options, $pix_obj ) );
       // Now this div's $.data has a plugin_pixellate() Plugin instance
       // referenced via '$.data( this, "plugin_" + exp_pluginName ).init();''
     } else if(typeof options === 'string') {
       exp_statusLog( "  ..*5c: $.fn[ " + globals.pluginName + " ](" + options + ")*" );
       $.data( this, globals.pluginInstanceName ).options.direction = options;
+      $.data( this, globals.pluginInstanceName ).$pix_obj = $pix_obj;
       $.data( this, globals.pluginInstanceName ).init();
     }
   });
 };
 
-function Plugin(el, options) {
+function Plugin(el, options, $pix_obj) {
   // Note: $(el) = '<div class="profile-container"'>
-  exp_statusLog( "  ..*5-creating Plugin: for " + $(el).attr('id') + ". On: " + $(el).attr('class') + "*");
+  exp_statusLog( "  ..*5-creating Plugin: for " + $(el).attr('id') + ". On: " + $(el).attr('class') +
+                 ".  $pixels at " + $pix_obj.attr('id') + "*");
   this.$el = $(el);
+  this.$pix_obj = $pix_obj;
   this.options = $.extend({}, globals.defaults, options);
   this._defaults = globals.defaults;
   this._name = globals.pluginName;
@@ -43,14 +46,7 @@ Plugin.prototype = {
     // Note: this.$el = '<div class="profile-container"'>
     exp_statusLog( "  ..*7-Plugin init for " + this.$el.attr('id') + "*");
     // this.$el.pixellate-pixel is an array of spans for each image fragment.
-    if(!this.$el.find('.pixellate-pixel').length) {
-      //this.$el.data('pixellate-image-src',
-      //               this.$el.find(globals.pixellate_pixels_container_class_ref).attr('bio-img-src'));
-      //this.$el.addClass('pixellate-lock');
-      //exp_statusLog( "  ..*7a: copy of halftone-profile file " + this.$el.data('pixellate-image-src') +
-      //               " loaded into div." + globals.pixellate_pixels_container_class_ref + ".*");
-      //this.createPixels();
-
+    if(!this.$pix_obj.find('.pixellate-pixel').length) {
       var $img = this.$el.find(globals.pixellate_photo_class_ref).find('img'),
           img = new Image();
 
@@ -72,19 +68,21 @@ Plugin.prototype = {
   },
 
   createPixels: function() {
-    this.$el.find(globals.pixellate_pixels_container_class_ref).append(new Array((this.options.rows * this.options.columns) + 1).join('<span class="pixellate-pixel"></span>'));
-    exp_statusLog( "  ..*9-createPixels: pixellate-pixel[ ].length = '" + this.$el.find('.pixellate-pixel').length + "'*");
+    this.$pix_obj.find(globals.pixellate_pixels_container_class_ref).append(new Array((this.options.rows * this.options.columns) + 1).join('<span class="pixellate-pixel"></span>'));
+    exp_statusLog( "  ..*9-create $pixels at " + this.$pix_obj.attr('id') + ": pixellate-pixel[ ].length = '" + this.$pix_obj.find('.pixellate-pixel').length + "'*");
     this.stylePixels(true);
     },
 
   stylePixels: function(initializeStyles) {
-    exp_statusLog( "  ..*10-stylePixels( " + (initializeStyles ? "onlyInitStyles" : this.options.direction) + " )*" );
+    exp_statusLog( "  ..*10-stylePixels( " + (initializeStyles ? "onlyInitStyles" : this.options.direction) +
+                   ". Using $pixels at " + this.$pix_obj.attr('id') + " )*" );
     var self = this,
-        w = this.$el.find(globals.pixellate_pixels_container_class_ref).width(),
-        h = this.$el.find(globals.pixellate_pixels_container_class_ref).height(),
+        w = this.$pix_obj.find(globals.pixellate_pixels_container_class_ref).width(),
+        h = this.$pix_obj.find(globals.pixellate_pixels_container_class_ref).height(),
         columns = this.options.columns,
         rows = this.options.rows,
-        $pixels = this.$el.find('.pixellate-pixel');
+        $pixels = this.$pix_obj.find('.pixellate-pixel'),
+        $pixels_container = this.$pix_obj.find(globals.pixellate_pixels_container_class_ref);
 
     // $('.explode').find('.pixellate-pixel')[0] (length of array = 400)
     // <span class="pixellate-pixel"
@@ -113,6 +111,7 @@ Plugin.prototype = {
       var pixelStyles = {};
 
       if(initializeStyles) {
+        $pixels_container.addClass('initializeStyles');
         var x = (idx % columns) * styles.width,
             y = (Math.floor(idx / rows)) * styles.height;
 
@@ -123,6 +122,8 @@ Plugin.prototype = {
         });
       } else {
         if(self.options.direction == 'out') {
+          $pixels_container.removeClass('imploded');
+          $pixels_container.addClass('exploded');
           var randX = (Math.random() * 300) - 150 - (self.options.explosionOrigin[0] * 150),
               randY = (Math.random() * 300) - 150 - (self.options.explosionOrigin[1] * 150);
 
@@ -137,6 +138,8 @@ Plugin.prototype = {
             'transition': self.options.duration+'ms ease-out'
           });
         } else if(self.options.direction == 'in') {
+          $pixels_container.removeClass('exploded');
+          $pixels_container.addClass('imploded');
           $.extend(pixelStyles, {
             'transform': 'none',
             'opacity': 1,
@@ -147,4 +150,96 @@ Plugin.prototype = {
       $pixels.eq(idx).css(pixelStyles);
     }
   }
+};
+
+// Update the active bio slot with the specified profile.
+// params: profile_idx: integer
+//         action: string - 'implode' or ''
+//         delay: ms to delay before performing action.
+//         callback: code to resume when done
+function swap_in_bio( profile_idx, action, delay, /*Code to resume when done*/ callback ) {
+  var src_profile = $( $(globals.pixellate_class_ref).toArray()[ profile_idx ] ),
+      active_bio_idx = parseInt( $(globals.bio_containers_class_ref ).attr('active_bio_idx') ),
+      dest_bio = $( $(globals.bio_container_class_ref).toArray()[ active_bio_idx ] );
+
+  exp_statusLog( "  ..*16: swap_in_bio('" + action + "') for profile_idx " + profile_idx +
+                 ". Active bioId: " + dest_bio.attr('active_id') +
+                 ". New ProfileId: " + src_profile.attr('id') + ".*" );
+
+  dest_bio.attr('active_id', src_profile.attr('id'));
+  dest_bio.attr('active_idx', src_profile.attr('profile-idx'));
+  dest_bio.find('.name').html(src_profile.find('.name').html());
+  dest_bio.find('.title').html(src_profile.find('.title').html());
+  dest_bio.find('.short-bio').html(src_profile.find('.short-bio').html());
+
+  var profile_tag = src_profile.find( '.name' ).html().split(' ')[0].toLowerCase();
+  dest_bio.attr('id', ('active_bio_for_profile-' + (profile_idx + '') + '-' + profile_tag) );
+  dest_bio.attr( 'bio-profile-tag', profile_tag );
+  $( globals.bio_containers_class_ref ).attr('active_profile_idx', profile_idx + '');
+
+  /*
+    <div class="col-sm-5">
+      // bio-container bio-active
+      <div class="bio-background-image"></div>
+      // profile-container
+      <div class="short-bio"></div>
+      <div class="bio-photo">
+        <img src="../images/laura_oliphant-halftone-image-generator-smart-2-bright-verysmall.png"/>
+      </div>
+      <div class="bio-pixell-array"></div>
+    </div>
+  */
+
+  // NOTE: initial state of default profile is an exploded image.
+  // 1) Move profile pixell array of spans into bio display page.
+
+  // 'div.bio-container'.bio-active'.find('
+  //                    .bio-background-image')
+  //                    .append( 'div.profile-container id="gina"'.find(
+  //                             '.bio-pixell-array') );
+  //
+  dest_bio.find( globals.pixellate_target_class_ref )
+          .append( src_profile.find(globals.pixellate_pixels_container_class_ref ) );
+
+  setTimeout(function() {
+    if (action == 'implode') {
+      // implode/rebuild halftone image.
+      src_profile.pixellate( 'in', dest_bio );
+    }
+
+    callback();
+    return;
+  }, delay);
+};
+
+// Take the updated contents of the specified bio (active) and put it back
+// in its profile container.
+// params: bio_idx: integer,
+//         action: 'explode' or ''
+//         delay: ms to delay after performing action.
+//         callback: code to resume when done
+function swap_out_bio ( bio_idx, action, delay, /*Code to resume when done*/ callback ) {
+  var src_bio =  $( $(globals.bio_container_class_ref).toArray()[ bio_idx ] ),
+      dest_profile_idx = parseInt( $( globals.bio_containers_class_ref ).attr('active_profile_idx') ),
+      dest_profile = $( $(globals.pixellate_class_ref).toArray()[ dest_profile_idx ] );
+  exp_statusLog( "  ..*17: swap_out_bio('" + action +"') for bio_idx " + bio_idx +
+                 ". Take Bio-" + bio_idx + "-" + src_bio.attr('active_id') +
+                 " and put back in: " + dest_profile.attr('id') + ".*" );
+
+
+  if (action == 'explode') {
+    // explode halftone image in the bio page. NOTE: this is the normal state of
+    // the pixel array for an inactive profile.
+    dest_profile.pixellate( 'out', src_bio );
+  }
+  setTimeout(function() {
+    // Put the updated pixel array of the specified bio (active) and put it back
+    // in its profile container.
+    // globals.pixellate_pixels_container_class_ref
+    src_bio.find( '.bio-pixell-array' ).insertAfter( dest_profile.find('.bio-photo') );
+    $( globals.bio_containers_class_ref ).attr('active_profile_idx', '');
+
+    callback();
+    return;
+  }, delay);
 };

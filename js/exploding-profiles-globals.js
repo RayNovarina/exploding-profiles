@@ -27,6 +27,9 @@ var globals = {
     pixellate_pixels_container_class_ref: '.bio-pixell-array',
     pixellate_target_class_ref: '.bio-background-image',
 
+    bio_containers_class_ref: '.bios-container',
+    bio_container_class_ref: '.bio-container',
+
     defaults: {
       // Grid divisions
       columns: 20,
@@ -45,7 +48,8 @@ var globals = {
       //(e.g. [-1, 1] makes the explodey bits go up and to the right)
       explosionOrigin: [0,0],
 
-      active_profile_idx: 0
+      active_profile_idx: 0,
+      active_bio_idx: 0,
     }
   };
 exp_statusLog( "  ..*4-global data done*" );
