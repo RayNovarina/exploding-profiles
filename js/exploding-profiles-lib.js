@@ -155,45 +155,46 @@ Plugin.prototype = {
 // Update the active bio slot with the specified profile.
 // params: profile_idx: integer
 //         action: string - 'implode' or ''
-//         delay: ms to delay before performing action.
+//         action_delay: ms to delay before performing action.
+//         effect: string = 'scroll' or '': scroll to the new bio or insert html content.
 //         callback: code to resume when done
-function swap_in_bio( profile_idx, action, delay, /*Code to resume when done*/ callback ) {
+function swap_in_bio( profile_idx, action, action_delay, effect, /*Code to resume when done*/ callback ) {
   var src_profile = $( $(globals.pixellate_class_ref).toArray()[ profile_idx ] ),
       active_bio_idx = parseInt( $(globals.bio_containers_class_ref ).attr('active_bio_idx') ),
       dest_bio = $( $(globals.bio_container_class_ref).toArray()[ active_bio_idx ] );
 
-  exp_statusLog( "  ..*16: swap_in_bio('" + action + "') for profile_idx " + profile_idx +
-                 ". Active bioId: " + dest_bio.attr('active_id') +
-                 ". New ProfileId: " + src_profile.attr('id') + ".*" );
+  if (effect == 'scroll') {
+    var scroll_to_bio = $( $(globals.bio_container_class_ref).toArray()[ profile_idx ] );
 
-  dest_bio.attr('active_id', src_profile.attr('id'));
-  dest_bio.attr('active_idx', src_profile.attr('profile-idx'));
-  dest_bio.find('.name').html(src_profile.find('.name').html());
-  dest_bio.find('.title').html(src_profile.find('.title').html());
-  dest_bio.find('.short-bio').html(src_profile.find('.short-bio').html());
+    exp_statusLog( "  ..*16a: swap_in_bio('" + action + "':'" + effect + "') for profile_idx " + profile_idx +
+                   ". Active bioId: " + dest_bio.attr('active_id') +
+                   ". New ProfileId: " + src_profile.attr('id') +
+                   ". ScrollTo BioId:" + scroll_to_bio.attr('active_id') + ".*" );
+
+    $('html, body').animate({
+      scrollTop: 2000 // scroll_to_bio.offset().top
+    }, 1000);
+  } else {
+    exp_statusLog( "  ..*16b: swap_in_bio('" + action + "') for profile_idx " + profile_idx +
+                   ". Active bioId: " + dest_bio.attr('active_id') +
+                   ". New ProfileId: " + src_profile.attr('id') + ".*" );
+
+    dest_bio.attr('active_id', src_profile.attr('id'));
+    dest_bio.attr('active_idx', src_profile.attr('profile-idx'));
+    dest_bio.find('.name').html(src_profile.find('.name').html());
+    dest_bio.find('.title').html(src_profile.find('.title').html());
+    dest_bio.find('.short-bio').html(src_profile.find('.short-bio').html());
+  }
 
   var profile_tag = src_profile.find( '.name' ).html().split(' ')[0].toLowerCase();
   dest_bio.attr('id', ('active_bio_for_profile-' + (profile_idx + '') + '-' + profile_tag) );
   dest_bio.attr( 'bio-profile-tag', profile_tag );
   $( globals.bio_containers_class_ref ).attr('active_profile_idx', profile_idx + '');
 
-  /*
-    <div class="col-sm-5">
-      // bio-container bio-active
-      <div class="bio-background-image"></div>
-      // profile-container
-      <div class="short-bio"></div>
-      <div class="bio-photo">
-        <img src="../images/laura_oliphant-halftone-image-generator-smart-2-bright-verysmall.png"/>
-      </div>
-      <div class="bio-pixell-array"></div>
-    </div>
-  */
-
   // NOTE: initial state of default profile is an exploded image.
   // 1) Move profile pixell array of spans into bio display page.
 
-  // 'div.bio-container'.bio-active'.find('
+  // 'div.bio-container'.find('
   //                    .bio-background-image')
   //                    .append( 'div.profile-container id="gina"'.find(
   //                             '.bio-pixell-array') );
@@ -209,16 +210,16 @@ function swap_in_bio( profile_idx, action, delay, /*Code to resume when done*/ c
 
     callback();
     return;
-  }, delay);
+  }, action_delay);
 };
 
 // Take the updated contents of the specified bio (active) and put it back
 // in its profile container.
 // params: bio_idx: integer,
 //         action: 'explode' or ''
-//         delay: ms to delay after performing action.
+//         action_delay: ms to delay after performing action.
 //         callback: code to resume when done
-function swap_out_bio ( bio_idx, action, delay, /*Code to resume when done*/ callback ) {
+function swap_out_bio ( bio_idx, action, action_delay, /*Code to resume when done*/ callback ) {
   var src_bio =  $( $(globals.bio_container_class_ref).toArray()[ bio_idx ] ),
       dest_profile_idx = parseInt( $( globals.bio_containers_class_ref ).attr('active_profile_idx') ),
       dest_profile = $( $(globals.pixellate_class_ref).toArray()[ dest_profile_idx ] );
@@ -241,5 +242,5 @@ function swap_out_bio ( bio_idx, action, delay, /*Code to resume when done*/ cal
 
     callback();
     return;
-  }, delay);
+  }, action_delay);
 };

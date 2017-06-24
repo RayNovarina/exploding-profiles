@@ -32,8 +32,8 @@ var globals = {
 
     defaults: {
       // Grid divisions
-      columns: 20,
-      rows: 20,
+      columns: 30,
+      rows: 30,
 
       // Duration of explosion animation
       duration: 1500,

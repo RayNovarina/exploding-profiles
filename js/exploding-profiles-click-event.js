@@ -19,7 +19,7 @@ function exp_add_click_handler( profile_idx, profile_div) {
     swap_out_bio( active_bio_idx , 'explode', 1500,
     /*1-Callback when done*/ function() {
     // swap in clicked profile into active bio slot, implode/recreate the bio image.
-    swap_in_bio( clicked_profile_idx, 'implode', 0,
+    swap_in_bio( clicked_profile_idx, 'implode', 0, '',
     /*2-Callback when done*/ function() {
     /*2-*/})/*1-*/});
   });

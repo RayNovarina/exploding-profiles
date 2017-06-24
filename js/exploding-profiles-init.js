@@ -24,12 +24,25 @@ function exp_convert_data_to_html() {
   */
 
   exp_statusLog( "  ..*13: exp_init(): START data to html conversion.*" );
+  $bios_containers = $( globals.bio_containers_class_ref);
 
   $.each( $( '.profile-container' ).toArray(), function( index, el ) {
     var name = $(el).find( '.name' ).html().split(' ')[0].toLowerCase();
     $(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
     $(el).attr('profile-idx', index + '');
     $(el).attr( 'profile-name', name );
+
+    $bios_containers.append(
+      '<div class="row bio-container" active_id="' + $(el).attr( 'id') + '">' +
+        '<div class="col-sm-10">' +
+          '<div class="info">' +
+            '<div class="name">' + $(el).find( '.name' ).html() + '</div>' +
+            '<div class="title">' + $(el).find( '.title' ).html() + '</div>' +
+            '<div class="short-bio">' + $(el).find( '.short-bio' ).html() + '</div>' +
+          '</div>' +
+          '<div class="bio-background-image"></div>' +
+        '</div>' +
+      '</div>');
     if (index > 0) {
       $( ".init-status" ).addClass('status-ignore');
     }
@@ -45,7 +58,7 @@ function exp_build_default_view() {
   exp_statusLog( "  ..*15: exp_init(): Create default bio image from profile " + globals.defaults.active_profile_idx + ".*" );
   $( globals.bio_containers_class_ref ).attr('active_bio_idx', globals.defaults.active_bio_idx + '');
   // Put default profile into bio page, implode/create its bio image.
-  swap_in_bio( globals.defaults.active_profile_idx, 'implode', 0,
+  swap_in_bio( globals.defaults.active_profile_idx, 'implode', 0, '',
   /*1-Callback when done*/ function() {
-  /*1-*/}); 
+  /*1-*/});
 };
