@@ -171,19 +171,22 @@ function swap_in_bio( profile_idx, action, action_delay, effect, /*Code to resum
                    ". New ProfileId: " + src_profile.attr('id') +
                    ". ScrollTo BioId:" + scroll_to_bio.attr('active_id') + ".*" );
 
-    $('html, body').animate({
-      scrollTop: 2000 // scroll_to_bio.offset().top
-    }, 1000);
-  } else {
-    exp_statusLog( "  ..*16b: swap_in_bio('" + action + "') for profile_idx " + profile_idx +
+    //$('html, body').animate({
+    //  scrollTop: 2000 // scroll_to_bio.offset().top
+    //}, 1000);
+  } else { // if (effect == 'click')
+    exp_statusLog( "  ..*16b: swap_in_bio('" + action + "':'" + effect + "') " + profile_idx +
                    ". Active bioId: " + dest_bio.attr('active_id') +
-                   ". New ProfileId: " + src_profile.attr('id') + ".*" );
+                   ". New ProfileId: " + src_profile.attr('id') +
+                   ". ScrollTo BioId:" + scroll_to_bio.attr('active_id') + ".*" );
 
-    dest_bio.attr('active_id', src_profile.attr('id'));
-    dest_bio.attr('active_idx', src_profile.attr('profile-idx'));
-    dest_bio.find('.name').html(src_profile.find('.name').html());
-    dest_bio.find('.title').html(src_profile.find('.title').html());
-    dest_bio.find('.short-bio').html(src_profile.find('.short-bio').html());
+    TweenMax.to( window, 2, { scrollTo: "#someID" } );
+
+    //dest_bio.attr('active_id', src_profile.attr('id'));
+    //dest_bio.attr('active_idx', src_profile.attr('profile-idx'));
+    //dest_bio.find('.name').html(src_profile.find('.name').html());
+    //dest_bio.find('.title').html(src_profile.find('.title').html());
+    //dest_bio.find('.short-bio').html(src_profile.find('.short-bio').html());
   }
 
   var profile_tag = src_profile.find( '.name' ).html().split(' ')[0].toLowerCase();
@@ -219,7 +222,7 @@ function swap_in_bio( profile_idx, action, action_delay, effect, /*Code to resum
 //         action: 'explode' or ''
 //         action_delay: ms to delay after performing action.
 //         callback: code to resume when done
-function swap_out_bio ( bio_idx, action, action_delay, /*Code to resume when done*/ callback ) {
+function swap_out_bio ( bio_idx, action, action_delay, effect, /*Code to resume when done*/ callback ) {
   var src_bio =  $( $(globals.bio_container_class_ref).toArray()[ bio_idx ] ),
       dest_profile_idx = parseInt( $( globals.bio_containers_class_ref ).attr('active_profile_idx') ),
       dest_profile = $( $(globals.pixellate_class_ref).toArray()[ dest_profile_idx ] );
@@ -227,20 +230,25 @@ function swap_out_bio ( bio_idx, action, action_delay, /*Code to resume when don
                  ". Take Bio-" + bio_idx + "-" + src_bio.attr('active_id') +
                  " and put back in: " + dest_profile.attr('id') + ".*" );
 
-
-  if (action == 'explode') {
-    // explode halftone image in the bio page. NOTE: this is the normal state of
-    // the pixel array for an inactive profile.
-    dest_profile.pixellate( 'out', src_bio );
-  }
-  setTimeout(function() {
-    // Put the updated pixel array of the specified bio (active) and put it back
-    // in its profile container.
-    // globals.pixellate_pixels_container_class_ref
-    src_bio.find( '.bio-pixell-array' ).insertAfter( dest_profile.find('.bio-photo') );
-    $( globals.bio_containers_class_ref ).attr('active_profile_idx', '');
-
+  if ( src_bio.find( '.bio-pixell-array' ).length == 0 ) {
+    exp_statusLog( "  ..*17a: swap_out_bio: src_bio.pixellArray is empty. Ignore swap_out. *");
     callback();
     return;
-  }, action_delay);
+  } else {
+    if (action == 'explode') {
+      // explode halftone image in the bio page. NOTE: this is the normal state of
+      // the pixel array for an inactive profile.
+      dest_profile.pixellate( 'out', src_bio );
+    }
+    setTimeout(function() {
+      // Put the updated pixel array of the specified bio (active) and put it back
+      // in its profile container.
+      // globals.pixellate_pixels_container_class_ref
+      src_bio.find( '.bio-pixell-array' ).insertAfter( dest_profile.find('.bio-photo') );
+      $( globals.bio_containers_class_ref ).attr('active_profile_idx', '');
+
+      callback();
+      return;
+    }, action_delay);
+  }
 };
