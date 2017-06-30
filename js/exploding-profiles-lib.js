@@ -189,7 +189,9 @@ function swap_in_bio( profile_idx, action, action_delay, effect, /*Code to resum
     //dest_bio.find('.short-bio').html(src_profile.find('.short-bio').html());
   }
 
-  var profile_tag = src_profile.find( '.name' ).html().split(' ')[0].toLowerCase();
+  //var profile_tag = src_profile.find( '.name' ).html().split(' ')[0].toLowerCase();
+  var img_src = src_profile.find('img:first-child').attr('src');
+  var name = img_src.slice( img_src.indexOf('/') + 1, img_src.indexOf('_') );
   dest_bio.attr('id', ('active_bio_for_profile-' + (profile_idx + '') + '-' + profile_tag) );
   dest_bio.attr( 'bio-profile-tag', profile_tag );
   jQuery( globals.bio_containers_class_ref ).attr('active_profile_idx', profile_idx + '');

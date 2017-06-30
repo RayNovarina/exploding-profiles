@@ -10,6 +10,12 @@
 4) On click event:
 5) On scroll event:
 
+1) Transform photo into effects container.
+     - convert from img.png to img-halftone.png
+2) Attach scroll event to photo.
+     - trigger when photo is in/out of view.
+3) Build effects container per location data.
+     - explode/implode transformed photo.
 */
 
 exp_statusLog( "  ..*1-uponLoad*" );

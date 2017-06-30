@@ -61,6 +61,9 @@ var globals = {
     bio_containers_class_ref: '.bios-container',
     bio_container_class_ref: '.bio-container',
 
+    effect_trigger_tag: '.bio-container-for-',
+    effect_trigger_class_root: '.bio-container-for-',
+
     target_page_class_ref: '.page-id-874',
 
     defaults: {

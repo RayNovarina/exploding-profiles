@@ -88,7 +88,8 @@ var $bios_containers = jQuery( globals.bio_containers_class_ref);
 if ( $bios_containers.length > 0 ) {
 
   jQuery.each( jQuery( globals.pixellate_class_ref ).toArray(), function( index, el ) {
-    var name = jQuery(el).find( '.name' ).html().split(' ')[0].toLowerCase();
+    var img_src = jQuery(el).find('img:first-child').attr('src');
+    var name = img_src.slice( img_src.indexOf('/') + 1, img_src.indexOf('_') );
     jQuery(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
     jQuery(el).attr('profile-idx', index + '');
     jQuery(el).attr( 'profile-name', name );
@@ -98,12 +99,12 @@ if ( $bios_containers.length > 0 ) {
                  ' bio-container-for-' + jQuery(el).attr( 'id') + '"' +
           ' profile-idx="' + jQuery(el).attr('profile-idx') + '"' +
           ' active_id="' + jQuery(el).attr( 'id') + '">' +
-        '<div class="col-sm-10">' +
-          '<div class="info">' +
-            '<div class="name">' + jQuery(el).find( '.name' ).html() + '</div>' +
-            '<div class="title">' + jQuery(el).find( '.title' ).html() + '</div>' +
-            '<div class="short-bio">' + jQuery(el).find( '.short-bio' ).html() + '</div>' +
-          '</div>' +
+        //'<div class="col-sm-10">' +
+        //  '<div class="info">' +
+            //'<div class="name">' + jQuery(el).find( '.name' ).html() + '</div>' +
+            //'<div class="title">' + jQuery(el).find( '.title' ).html() + '</div>' +
+            //'<div class="short-bio">' + jQuery(el).find( '.short-bio' ).html() + '</div>' +
+        //  '</div>' +
           '<div class="bio-background-image"></div>' +
         '</div>' +
       '</div>');
@@ -124,8 +125,8 @@ if ( $bios_containers.length > 0 ) {
 
       new ScrollMagic.Scene({
         // trigger point is the bio Title line.
-        triggerElement: '.bio-container-for-' + jQuery(el).attr( 'id')
-        + ' .info' + ' .title', // point of execution
+        triggerElement: globals.effect_trigger_class_root + jQuery(el).attr( 'id'),
+        //+ ' .info' + ' .title', // point of execution
         triggerHook: 'onEnter', // on enter from the bottom.
         // ,offset: 200
       })
@@ -139,7 +140,7 @@ if ( $bios_containers.length > 0 ) {
           exp_scroll_trigger( event,
             (event.state == 'DURING' ? 'moving_up_into_view' :
              event.state == 'BEFORE' ? 'moving_down_out_of_view' : ''),
-            '.bio-container-for-', '.bio-container-for-' + jQuery(el).attr( 'id') );
+             globals.effect_trigger_tag, globals.effect_trigger_class_root + jQuery(el).attr( 'id') );
       })
       .addTo(globals.scrollMagic_controller); // assign the scene to the controller
 
