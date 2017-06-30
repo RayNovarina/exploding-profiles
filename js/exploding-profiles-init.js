@@ -1,7 +1,7 @@
 
 function exp_init() {
   // console.clear();
-  console.log("************************ exp_init( scroll_events: " + globals.scroll_events + ") ************************");
+  console.log("************************ exp_init( scroll_events: " + globals.defaults.scroll_events + ") ************************");
   // jQuery:
   if (typeof jQuery !== 'undefined') {
     // jQuery is loaded
@@ -11,6 +11,17 @@ function exp_init() {
         (function( $ ) {
           $( '.class' ).doSomething();  // works always
         })( jQuery )
+
+        When you enqueue script that is dependent on jQuery, note that the jQuery in
+        WordPress runs in noConflict mode, which means you cannot use the common $ alias.
+        You must use the full jQuery instead. Alternately, place your code using
+        the $ shortcut inside a noConflict wrapper.
+
+        jQuery( document ).ready( function( $ ) {
+            // $() will work as an alias for jQuery() inside of this function
+            [ your code goes here ]
+        } );
+
     */
   } else {
     console.debug("jQuery NOT loaded");
@@ -45,7 +56,7 @@ function exp_init() {
     console.debug("ScrollToPlugin NOT loaded");
   }
 
-  $(window).load(function () {
+  jQuery(window).load(function () {
    window.scrollTo(0,0);
   });
 
@@ -72,25 +83,26 @@ function exp_convert_data_to_html() {
   </div>
   */
 
-  exp_statusLog( "  ..*13: exp_init(): START data to html conversion.*" );
-  $bios_containers = $( globals.bio_containers_class_ref);
+exp_statusLog( "  ..*13: exp_init(): START data to html conversion.*" );
+var $bios_containers = jQuery( globals.bio_containers_class_ref);
+if ( $bios_containers.length > 0 ) {
 
-  $.each( $( '.profile-container' ).toArray(), function( index, el ) {
-    var name = $(el).find( '.name' ).html().split(' ')[0].toLowerCase();
-    $(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
-    $(el).attr('profile-idx', index + '');
-    $(el).attr( 'profile-name', name );
+  jQuery.each( jQuery( globals.pixellate_class_ref ).toArray(), function( index, el ) {
+    var name = jQuery(el).find( '.name' ).html().split(' ')[0].toLowerCase();
+    jQuery(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
+    jQuery(el).attr('profile-idx', index + '');
+    jQuery(el).attr( 'profile-name', name );
 
     $bios_containers.append(
       '<div class="row bio-container' +
-                 ' bio-container-for-' + $(el).attr( 'id') + '"' +
-          ' profile-idx="' + $(el).attr('profile-idx') + '"' +
-          ' active_id="' + $(el).attr( 'id') + '">' +
+                 ' bio-container-for-' + jQuery(el).attr( 'id') + '"' +
+          ' profile-idx="' + jQuery(el).attr('profile-idx') + '"' +
+          ' active_id="' + jQuery(el).attr( 'id') + '">' +
         '<div class="col-sm-10">' +
           '<div class="info">' +
-            '<div class="name">' + $(el).find( '.name' ).html() + '</div>' +
-            '<div class="title">' + $(el).find( '.title' ).html() + '</div>' +
-            '<div class="short-bio">' + $(el).find( '.short-bio' ).html() + '</div>' +
+            '<div class="name">' + jQuery(el).find( '.name' ).html() + '</div>' +
+            '<div class="title">' + jQuery(el).find( '.title' ).html() + '</div>' +
+            '<div class="short-bio">' + jQuery(el).find( '.short-bio' ).html() + '</div>' +
           '</div>' +
           '<div class="bio-background-image"></div>' +
         '</div>' +
@@ -112,7 +124,7 @@ function exp_convert_data_to_html() {
 
       new ScrollMagic.Scene({
         // trigger point is the bio Title line.
-        triggerElement: '.bio-container-for-' + $(el).attr( 'id')
+        triggerElement: '.bio-container-for-' + jQuery(el).attr( 'id')
         + ' .info' + ' .title', // point of execution
         triggerHook: 'onEnter', // on enter from the bottom.
         // ,offset: 200
@@ -127,44 +139,53 @@ function exp_convert_data_to_html() {
           exp_scroll_trigger( event,
             (event.state == 'DURING' ? 'moving_up_into_view' :
              event.state == 'BEFORE' ? 'moving_down_out_of_view' : ''),
-            '.bio-container-for-', '.bio-container-for-' + $(el).attr( 'id') );
+            '.bio-container-for-', '.bio-container-for-' + jQuery(el).attr( 'id') );
       })
       .addTo(globals.scrollMagic_controller); // assign the scene to the controller
 
       /*
       new ScrollMagic.Scene({
-        triggerElement: '.bio-container-for-' + $(el).attr( 'id')
+        triggerElement: '.bio-container-for-' + jQuery(el).attr( 'id')
         + ' .info' // point of execution
         ,triggerHook: 'onLeave' //
       })
       .on('start', function () {
-          exp_scroll_trigger( '.bio-container-for-', '.bio-container-for-' + $(el).attr( 'id') );
+          exp_scroll_trigger( '.bio-container-for-', '.bio-container-for-' + jQuery(el).attr( 'id') );
       })
       .addTo(globals.scrollMagic_controller);
     */
     }
 
     if (index > 0) {
-      $( ".init-status" ).addClass('status-ignore');
+      jQuery( ".init-status" ).addClass('status-ignore');
     }
-    $(el).pixellate('', $(el)); // chop up bio image into 'div.profile-container.bio-pixell-array' $pixel <span> array.
-    $(el).pixellate('out', $(el)); // initial state is an exploded image.
+    jQuery(el).pixellate('', jQuery(el)); // chop up bio image into 'div.profile-container.bio-pixell-array' $pixel <span> array.
+    jQuery(el).pixellate('out', jQuery(el)); // initial state is an exploded image.
     if ( globals.defaults.click_events) {
       exp_add_click_handler( index, el);
     }
   });
-  $( ".init-status" ).removeClass('status-ignore');
-  exp_statusLog( "  ..*14: exp_init(): END data to html conversion.*" );
+  jQuery( ".init-status" ).removeClass('status-ignore');
+
+} else {
+  exp_statusLog( "  ..*13a: exp_init(): '" + globals.bio_containers_class_ref + "' NOT FOUND: Profile-Effects is deactivated.'*");
+}
+
+exp_statusLog( "  ..*14: exp_init(): END data to html conversion.*" );
 };
 
 function exp_build_default_view() {
-  exp_statusLog( "  ..*15: exp_init(): Create default bio image from profile " + globals.defaults.active_profile_idx + ".*" );
-  $( globals.bio_containers_class_ref ).attr('active_bio_idx', globals.defaults.active_bio_idx + '');
-  // NOTE: upload, scroll event will trigger for 1st bio. Use that event to init bio page.
-  if ( !globals.defaults.scroll_events) {
-    // Put default profile into bio page, implode/create its bio image.
-    swap_in_bio( globals.defaults.active_profile_idx, 'implode', 0, '',
-    /*1-Callback when done*/ function() {
-    /*1-*/});
+  if ( jQuery( globals.bio_containers_class_ref).length > 0 ) {
+    exp_statusLog( "  ..*15: exp_init(): Create default bio image from profile " + globals.defaults.active_profile_idx + ".*" );
+    jQuery( globals.bio_containers_class_ref ).attr('active_bio_idx', globals.defaults.active_bio_idx + '');
+    // NOTE: upload, scroll event will trigger for 1st bio. Use that event to init bio page.
+    if ( !globals.defaults.scroll_events) {
+      // Put default profile into bio page, implode/create its bio image.
+      swap_in_bio( globals.defaults.active_profile_idx, 'implode', 0, '',
+      /*1-Callback when done*/ function() {
+      /*1-*/});
+    }
+  } else {
+    exp_statusLog( "  ..*15a: exp_init(): '" + globals.bio_containers_class_ref + "' NOT FOUND: default bio image not built.'*");
   }
 };

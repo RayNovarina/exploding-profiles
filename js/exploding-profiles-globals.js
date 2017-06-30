@@ -61,6 +61,8 @@ var globals = {
     bio_containers_class_ref: '.bios-container',
     bio_container_class_ref: '.bio-container',
 
+    target_page_class_ref: '.page-id-874',
+
     defaults: {
       // Grid divisions
       columns: 30,
@@ -86,7 +88,7 @@ var globals = {
       active_bio_idx: 0,
 
       // Scrolling results in change of profile.
-      scroll_events: true,
+      scroll_events: false,
 
       // Click on profile photo results in change of profile.
       click_events: false,

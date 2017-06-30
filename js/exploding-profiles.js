@@ -14,8 +14,9 @@
 
 exp_statusLog( "  ..*1-uponLoad*" );
 
-$(function() {
+jQuery(function() {
   exp_statusLog( "  ..*2-domReady*" );
+  exp_target_page_fixups();
   exp_init();
   exp_convert_data_to_html();
   exp_build_default_view();
